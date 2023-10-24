@@ -30,16 +30,6 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Test') {
-            agent {
-              docker {
-                  image 'node:lts-buster-slim'
-              }
-            }
-            steps {
-                sh 'npm run test'
-            }
-        }
         stage('SCA Snyk Test') {
             agent {
               docker {

@@ -24,6 +24,7 @@ pipeline {
             agent {
               docker {
                   image 'node:lts-buster-slim'
+                  args '-u root --network host'
               }
             }
             steps {

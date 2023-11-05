@@ -1,8 +1,8 @@
 pipeline {
     agent none
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockeracces')
-        SNYK_CREDENTIALS = credentials('snykacces')
+        DOCKERHUB_CREDENTIALS = credentials('accesdocker')
+        SNYK_CREDENTIALS = credentials('accessnyk')
     }
     stages {
         stage('Secret Scanning Using Trufflehog') {
@@ -108,7 +108,7 @@ pipeline {
                 }
             }
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: "serverappaccess", keyFileVariable: 'keyfile')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: "AccesSVRApp", keyFileVariable: 'keyfile')]) {
                     sh 'ssh -i ${keyfile} -o StrictHostKeyChecking=no root@202.169.43.183 "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"'
                     sh 'ssh -i ${keyfile} -o StrictHostKeyChecking=no root@202.169.43.183 docker pull xenjutsu/nodegoat:0.1'
                     sh 'ssh -i ${keyfile} -o StrictHostKeyChecking=no root@202.169.43.183 docker rm --force nodegoat'

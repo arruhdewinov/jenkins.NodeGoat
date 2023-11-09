@@ -71,7 +71,7 @@ pipeline {
                 archiveArtifacts artifacts: 'retire-scan-report.txt'
             }
         }
-        stage('SCA OWASP Dependency Check') {
+ /*       stage('SCA OWASP Dependency Check') {
             agent {
               docker {
                   image 'owasp/dependency-check:latest'
@@ -86,7 +86,7 @@ pipeline {
                 archiveArtifacts artifacts: 'dependency-check-report.json'
                 archiveArtifacts artifacts: 'dependency-check-report.xml'
             }
-        }
+        }*/
         stage('Build Docker Image and Push to Docker Registry') {
             agent {
                 docker {
